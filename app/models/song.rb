@@ -15,4 +15,8 @@ class Song < ApplicationRecord
   def album_title
     self.album_id ? self.album.title : ''
   end
+
+  def format_length
+    Time.at(self.length).utc.strftime("%-M:%S")
+  end
 end
