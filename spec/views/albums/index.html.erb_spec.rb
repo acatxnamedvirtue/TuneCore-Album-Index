@@ -1,28 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe "albums/index", type: :view do
+RSpec.describe 'albums/index', type: :view do
   before(:each) do
-    assign(:albums, [
-      Album.create!(
-        :title => "Title",
-        :artist_id => 2,
-        :year => "Year",
-        :genre => "Genre"
-      ),
-      Album.create!(
-        :title => "Title",
-        :artist_id => 2,
-        :year => "Year",
-        :genre => "Genre"
-      )
-    ])
+    @album1, @album2 = FactoryGirl.create(:album), FactoryGirl.create(:album)
+    assign(:albums, [@album1, @album2])
   end
 
-  it "renders a list of albums" do
+  it 'renders a list of albums' do
     render
-    assert_select "tr>td", :text => "Title".to_s, :count => 2
-    assert_select "tr>td", :text => 2.to_s, :count => 2
-    assert_select "tr>td", :text => "Year".to_s, :count => 2
-    assert_select "tr>td", :text => "Genre".to_s, :count => 2
+    assert_select 'tr>td', :text => @album1.title, :count => 2
+    assert_select 'tr>td', :text => @album1.artist_id.to_s, :count => 1
+    assert_select 'tr>td', :text => @album2.artist_id.to_s, :count => 1
+    assert_select 'tr>td', :text => @album1.year, :count => 2
+    assert_select 'tr>td', :text => @album1.genre, :count => 2
   end
 end

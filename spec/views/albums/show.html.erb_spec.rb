@@ -1,20 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe "albums/show", type: :view do
+RSpec.describe 'albums/show', type: :view do
   before(:each) do
-    @album = assign(:album, Album.create!(
-      :title => "Title",
-      :artist_id => 2,
-      :year => "Year",
-      :genre => "Genre"
-    ))
+    @album = assign(:album, FactoryGirl.create(:album))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
-    expect(rendered).to match(/Title/)
-    expect(rendered).to match(/2/)
-    expect(rendered).to match(/Year/)
-    expect(rendered).to match(/Genre/)
+    expect(rendered).to match(@album.title)
+    expect(rendered).to match(@album.artist_id.to_s)
+    expect(rendered).to match(@album.year)
+    expect(rendered).to match(@album.genre)
   end
 end

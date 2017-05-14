@@ -1,28 +1,22 @@
 require 'rails_helper'
 
-RSpec.describe "songs/index", type: :view do
+RSpec.describe 'songs/index', type: :view do
   before(:each) do
-    assign(:songs, [
-      Song.create!(
-        :title => "Title",
-        :album_id => 2,
-        :artist_id => 3,
-        :length => 4
-      ),
-      Song.create!(
-        :title => "Title",
-        :album_id => 2,
-        :artist_id => 3,
-        :length => 4
-      )
-    ])
+    @song1 = FactoryGirl.create(:song)
+    @song2 = FactoryGirl.create(:not_matching_song)
+
+    assign(:songs, [@song1, @song2])
   end
 
-  it "renders a list of songs" do
+  it 'renders a list of songs' do
     render
-    assert_select "tr>td", :text => "Title".to_s, :count => 2
-    assert_select "tr>td", :text => 2.to_s, :count => 2
-    assert_select "tr>td", :text => 3.to_s, :count => 2
-    assert_select "tr>td", :text => 4.to_s, :count => 2
+    assert_select 'tr>td', :text => @song1.title, :count => 1
+    assert_select 'tr>td', :text => @song1.album.title, :count => 2
+    assert_select 'tr>td', :text => @song1.track_number.to_s, :count => 1
+    assert_select 'tr>td', :text => @song1.length.to_s, :count => 1
+
+    assert_select 'tr>td', :text => @song2.title, :count => 1
+    assert_select 'tr>td', :text => @song2.track_number.to_s, :count => 1
+    assert_select 'tr>td', :text => @song2.length.to_s, :count => 1
   end
 end

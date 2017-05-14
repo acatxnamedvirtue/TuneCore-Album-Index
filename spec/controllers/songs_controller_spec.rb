@@ -9,6 +9,14 @@ RSpec.describe SongsController, type: :controller do
     {title: nil, album_id: nil, track_number: nil, length: nil}
   }
 
+  let(:create_attributes) {
+    {title: 'title', album_title: FactoryGirl.create(:album).title, track_number: 1, length: 9000}
+  }
+
+  let(:invalid_create_attributes) {
+    {title: nil, album_title: nil, track_number: nil, length: nil}
+  }
+
   let(:valid_session) {{}}
 
   describe "GET #index" do
@@ -46,19 +54,19 @@ RSpec.describe SongsController, type: :controller do
     context "with valid params" do
       it "creates a new Song" do
         expect {
-          post :create, params: {song: valid_attributes}, session: valid_session
+          post :create, params: {song: create_attributes}, session: valid_session
         }.to change(Song, :count).by(1)
       end
 
       it "redirects to the created song" do
-        post :create, params: {song: valid_attributes}, session: valid_session
+        post :create, params: {song: create_attributes}, session: valid_session
         expect(response).to redirect_to(Song.last)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {song: invalid_attributes}, session: valid_session
+        post :create, params: {song: invalid_create_attributes}, session: valid_session
         expect(response).to be_success
       end
     end

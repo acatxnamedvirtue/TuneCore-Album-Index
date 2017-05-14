@@ -6,10 +6,13 @@ class Song < ApplicationRecord
 
   def self.search(search)
     if search
-      # find(:all, :conditions => ['songs.title LIK}E ?', "%#{search}%"])
       where('title LIKE ?', "%#{search}")
     else
-      all()
+      all
     end
+  end
+
+  def album_title
+    self.album_id ? self.album.title : ''
   end
 end

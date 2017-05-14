@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :album do
-    title 'My title'
+    title 'My album title'
     artist_id {FactoryGirl.create(:artist).id}
-    genre 'My genre'
-    year 'My year'
+    genre 'My album genre'
+    year 'My album year'
   end
 end

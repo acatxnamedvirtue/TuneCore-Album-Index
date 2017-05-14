@@ -1,10 +1,11 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /songs
   # GET /songs.json
   def index
-    @songs = Song.all
+    @songs = Song.all.includes(:album)
   end
 
   # GET /songs/1
@@ -24,15 +25,21 @@ class SongsController < ApplicationController
   # POST /songs
   # POST /songs.json
   def create
-    @song = Song.new(song_params)
+    album = Album.find_by('title = ?', song_params['album_title'])
+    params = song_params
+    params.delete(:album_title)
+    if album
+      params['album_id'] = album.id
+    end
+    @song = Song.new(params)
 
     respond_to do |format|
       if @song.save
-        format.html { redirect_to @song, notice: 'Song was successfully created.' }
-        format.json { render :show, status: :created, location: @song }
+        format.html {redirect_to @song, notice: 'Song was successfully created.'}
+        format.json {render :show, status: :created, location: @song}
       else
-        format.html { render :new }
-        format.json { render json: @song.errors, status: :unprocessable_entity }
+        format.html {render :new}
+        format.json {render json: @song.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -42,11 +49,11 @@ class SongsController < ApplicationController
   def update
     respond_to do |format|
       if @song.update(song_params)
-        format.html { redirect_to @song, notice: 'Song was successfully updated.' }
-        format.json { render :show, status: :ok, location: @song }
+        format.html {redirect_to @song, notice: 'Song was successfully updated.'}
+        format.json {render :show, status: :ok, location: @song}
       else
-        format.html { render :edit }
-        format.json { render json: @song.errors, status: :unprocessable_entity }
+        format.html {render :edit}
+        format.json {render json: @song.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -56,19 +63,17 @@ class SongsController < ApplicationController
   def destroy
     @song.destroy
     respond_to do |format|
-      format.html { redirect_to songs_url, notice: 'Song was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html {redirect_to songs_url, notice: 'Song was successfully destroyed.'}
+      format.json {head :no_content}
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_song
-      @song = Song.find(params[:id])
-    end
+  def set_song
+    @song = Song.includes(:album).find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def song_params
-      params.require(:song).permit(:title, :album_id, :track_number, :length)
-    end
+  def song_params
+    params.require(:song).permit(:title, :album_title, :track_number, :length)
+  end
 end

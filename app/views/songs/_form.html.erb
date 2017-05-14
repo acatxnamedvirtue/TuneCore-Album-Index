@@ -1,7 +1,7 @@
-<%= form_for(song) do |f| %>
+<%= form_for(song, {method: method, url: url}) do |f| %>
   <% if song.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(song.errors.count, "error") %> prohibited this song from being saved:</h2>
+      <h2><%= pluralize(song.errors.count, 'error') %> prohibited this song from being saved:</h2>
 
       <ul>
       <% song.errors.full_messages.each do |message| %>
@@ -17,13 +17,13 @@
   </div>
 
   <div class="field">
-    <%= f.label :album_id %>
-    <%= f.number_field :album_id %>
+    <%= f.label :album_title %>
+    <%= f.text_field :album_title %>
   </div>
 
   <div class="field">
-    <%= f.label :artist_id %>
-    <%= f.number_field :artist_id %>
+    <%= f.label :track_number %>
+    <%= f.number_field :track_number %>
   </div>
 
   <div class="field">

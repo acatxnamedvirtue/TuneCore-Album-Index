@@ -1,19 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe "artists/index", type: :view do
+RSpec.describe 'artists/index', type: :view do
   before(:each) do
-    assign(:artists, [
-      Artist.create!(
-        :name => "Name"
-      ),
-      Artist.create!(
-        :name => "Name"
-      )
-    ])
+    @artist1, @artist2 = FactoryGirl.create(:artist), FactoryGirl.create(:artist)
+    assign(:artists, [@artist1, @artist2])
   end
 
-  it "renders a list of artists" do
+  it 'renders a list of artists' do
     render
-    assert_select "tr>td", :text => "Name".to_s, :count => 2
+    assert_select 'tr>td', :text => @artist1.name, :count => 2
   end
 end
