@@ -1,8 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Songs</h1>
-
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Title</th>
@@ -20,9 +18,9 @@
         <td><%= song.album.title %></td>
         <td><%= song.track_number %></td>
         <td><%= song.length %></td>
-        <td><%= link_to 'Show', song %></td>
-        <td><%= link_to 'Edit', edit_song_path(song) %></td>
-        <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', song, class: 'btn btn-primary btn-xs' %></td>
+        <td><%= link_to 'Edit', edit_song_path(song), class: 'btn btn-info btn-xs' %></td>
+        <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></td>
       </tr>
     <% end %>
   </tbody>
