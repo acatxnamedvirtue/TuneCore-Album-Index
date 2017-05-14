@@ -4,8 +4,7 @@ class SongsController < ApplicationController
   # GET /songs
   # GET /songs.json
   def index
-    @songs = Song.all.includes(:album).includes(:artist)
-    @results ||= []
+    @songs = Song.all.includes(:album).includes(:artist).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /songs/1
@@ -70,11 +69,14 @@ class SongsController < ApplicationController
 
   # SEARCH /search
   def search
-    if params[:search]
-      @songs = Song.search(params[:search])
+    if params[:search] && params[:search] != ''
+      @songs = Song.search(params[:search]).paginate(page: params[:page], per_page: 10)
+      render partial: 'results', :content_type => 'text/html'
+    elsif params[:search] == ''
+      @songs = Song.all.paginate(page: params[:page], per_page: 10)
       render partial: 'results', :content_type => 'text/html'
     else
-      @songs = Song.all
+      @songs = Song.all.paginate(page: params[:page], per_page: 10)
       render :search
     end
   end

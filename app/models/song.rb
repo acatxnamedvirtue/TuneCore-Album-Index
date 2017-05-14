@@ -9,6 +9,7 @@ class Song < ApplicationRecord
     Song.joins(:album).joins(:artist)
         .where("to_tsvector('english', songs.title || ' ' || artists.name || ' ' || albums.title) @@ to_tsquery('english', ?)",
                search.split(' ').join(' & '))
+
   end
 
   def album_title

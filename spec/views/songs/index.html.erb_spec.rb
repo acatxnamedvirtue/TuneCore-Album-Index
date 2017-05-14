@@ -9,6 +9,7 @@ RSpec.describe 'songs/index', type: :view do
   end
 
   it 'renders a list of songs' do
+    allow(view).to receive_messages(:will_paginate => nil)
     render
     assert_select 'tr>td', :text => @song1.title, :count => 1
     assert_select 'tr>td', :text => @song1.album.title, :count => 1

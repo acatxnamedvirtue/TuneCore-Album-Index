@@ -5,7 +5,11 @@
     <%= submit_tag 'Search', :disable_with => 'Please wait...', :class => 'submit' %>
 <% end %>
 
-<div id="results">
-  <%= render partial: 'results', locals: { songs: @songs} %>
+<div id="page-paginate">
+  <%= will_paginate @songs %>
+  <div id="results">
+    <%= render partial: 'results', locals: {songs: @songs} %>
+  </div>
+  <%= will_paginate @songs %>
 </div>
 <br>

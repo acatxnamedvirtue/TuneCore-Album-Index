@@ -1,7 +1,10 @@
 <p id="notice"><%= notice %></p>
-
-<div id="results">
-  <%= render partial: 'results', locals: { songs: @songs} %>
+<div id="page-paginate">
+  <%= will_paginate @songs %>
+  <div id="results">
+    <%= render partial: 'results', locals: {songs: @songs} %>
+  </div>
+  <%= will_paginate @songs %>
 </div>
 <br>
 

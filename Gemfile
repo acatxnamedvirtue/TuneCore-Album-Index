@@ -14,7 +14,7 @@ gem 'rails', '~> 5.0.3'
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
-gem 'will_paginate', '3.1.5'
+gem 'will_paginate'
 
 
 # Use SCSS for stylesheets
