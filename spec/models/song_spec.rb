@@ -15,4 +15,21 @@ RSpec.describe Song, type: :model do
     it {should validate_presence_of(:track_number)}
     it {should validate_presence_of(:length)}
   end
+
+  describe 'Search' do
+    it 'should return all songs if no query is given' do
+      FactoryGirl.create_list(:song, 10)
+
+      results = Song.search(nil)
+      expect(results.length).to eq 10
+    end
+
+    it 'should return only songs that match if a query is given' do
+      FactoryGirl.create_list(:song, 10)
+      FactoryGirl.create_list(:not_matching_song, 10)
+
+      results = Song.search('title')
+      expect(results.length).to eq 10
+    end
+  end
 end
