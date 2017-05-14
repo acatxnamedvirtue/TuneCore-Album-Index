@@ -8,6 +8,6 @@ FactoryGirl.define do
   end
 
   factory :not_matching_artist, class: Artist  do
-    name 'this will not match artists'
+    name 'this will not match'
   end
 end

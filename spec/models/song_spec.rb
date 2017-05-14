@@ -28,7 +28,7 @@ RSpec.describe Song, type: :model do
       FactoryGirl.create_list(:matching_song, 10)
       FactoryGirl.create_list(:not_matching_song, 10)
 
-      results = Song.search('will match')
+      results = Song.search('songs')
       expect(results.length).to eq 10
     end
 
@@ -36,15 +36,28 @@ RSpec.describe Song, type: :model do
       FactoryGirl.create_list(:matching_song, 10)
       FactoryGirl.create_list(:not_matching_song, 10)
 
-      artist_results = Song.search('will match artists')
+      artist_results = Song.search('artists')
       expect(artist_results.length).to eq 10
 
-      album_results = Song.search('will match albums')
+      album_results = Song.search('albums')
       expect(album_results.length).to eq 10
 
-      song_results = Song.search('will match songs')
+      song_results = Song.search('songs')
       expect(song_results.length).to eq 10
+    end
 
+    it 'should match for any combination of Artist Name, Album Title, or Song Title' do
+      FactoryGirl.create_list(:matching_song, 10)
+
+      artists_albums_results = Song.search('artists albums')
+      artists_songs_results = Song.search('artists songs')
+      songs_albums_results = Song.search('songs albums')
+      artists_albums_songs_results = Song.search('songs albums artists')
+
+      expect(artists_albums_results.length).to eq 10
+      expect(artists_songs_results.length).to eq 10
+      expect(songs_albums_results.length).to eq 10
+      expect(artists_albums_songs_results.length).to eq 10
     end
   end
 end

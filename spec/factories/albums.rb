@@ -14,7 +14,7 @@ FactoryGirl.define do
   end
 
   factory :not_matching_album, class: Album do
-    title 'this will not match albums'
+    title 'this will not match'
     artist_id {FactoryGirl.create(:not_matching_artist).id}
     genre 'My album genre'
     year 'My album year'

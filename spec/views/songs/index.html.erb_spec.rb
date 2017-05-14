@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'songs/index', type: :view do
   before(:each) do
     @song1 = FactoryGirl.create(:song)
-    @song2 = FactoryGirl.create(:not_matching_song)
+    @song2 = FactoryGirl.create(:song2)
 
     assign(:songs, [@song1, @song2])
   end
