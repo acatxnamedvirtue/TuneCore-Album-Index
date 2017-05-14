@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Song, type: :model do
   subject {
-    described_class.new(title: 'title', album_id: 1, artist_id: 1, length: 9001)
+    artist = Artist.create(name: 'title')
+    album = Album.create(title: 'title', artist_id: artist.id, genre: 'genre', year: 'year')
+    described_class.new(title: 'title', album_id: album.id, length: 9001)
   }
 
   it 'is valid with valid attributes' do
@@ -19,13 +21,18 @@ RSpec.describe Song, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it 'is not valid without an artist_id' do
-    subject.artist_id = nil
-    expect(subject).to_not be_valid
-  end
-
   it 'is not valid without a length' do
     subject.length = nil
     expect(subject).to_not be_valid
+  end
+
+  describe 'Associations' do
+    it 'has one artist' do
+      should have_one(:artist)
+    end
+
+    it 'belongs to album' do
+      should belong_to(:album)
+    end
   end
 end

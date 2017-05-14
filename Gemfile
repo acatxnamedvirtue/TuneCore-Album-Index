@@ -15,6 +15,7 @@ gem 'puma', '~> 3.0'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'rspec-rails'
+gem 'shoulda'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
