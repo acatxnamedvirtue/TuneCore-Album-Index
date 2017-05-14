@@ -14,8 +14,7 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
-gem 'rspec-rails'
-gem 'shoulda'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -43,6 +42,14 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'shoulda'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end
 
 group :development do

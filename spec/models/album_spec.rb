@@ -1,42 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Album, type: :model do
-  subject {
-    artist = Artist.create(name: 'title')
-    described_class.new(title: 'title', artist_id: artist.id, genre: 'genre', year: '2017')
-  }
-
-  it 'is valid with valid attributes' do
-    expect(subject).to be_valid
-  end
-
-  it 'is not valid without a title' do
-    subject.title = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'is not valid without an artist_id' do
-    subject.artist_id = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'is not valid without an genre' do
-    subject.genre = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'is not valid without a year' do
-    subject.year = nil
-    expect(subject).to_not be_valid
-  end
+  subject {FactoryGirl.create(:album)}
 
   describe 'Associations' do
-    it 'belongs to an artist' do
-      should belong_to(:artist)
-    end
+    it {should belong_to(:artist)}
+    it {should have_many(:songs)}
+  end
 
-    it 'has many songs' do
-      should have_many(:songs)
-    end
+  describe 'Validations' do
+    it {should be_valid}
+    it {should validate_presence_of(:title)}
+    it {should validate_presence_of(:artist_id)}
+    it {should validate_presence_of(:genre)}
+    it {should validate_presence_of(:year)}
   end
 end
