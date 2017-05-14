@@ -25,11 +25,26 @@ RSpec.describe Song, type: :model do
     end
 
     it 'should return only songs that match if a query is given' do
-      FactoryGirl.create_list(:song, 10)
+      FactoryGirl.create_list(:matching_song, 10)
       FactoryGirl.create_list(:not_matching_song, 10)
 
-      results = Song.search('title')
+      results = Song.search('will match')
       expect(results.length).to eq 10
+    end
+
+    it 'should match based on Artist Name, Album Title, or Song Title' do
+      FactoryGirl.create_list(:matching_song, 10)
+      FactoryGirl.create_list(:not_matching_song, 10)
+
+      artist_results = Song.search('will match artists')
+      expect(artist_results.length).to eq 10
+
+      album_results = Song.search('will match albums')
+      expect(album_results.length).to eq 10
+
+      song_results = Song.search('will match songs')
+      expect(song_results.length).to eq 10
+
     end
   end
 end

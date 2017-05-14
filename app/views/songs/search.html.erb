@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_tag({:action => 'search'}, :remote => true, :'data-update-target' => 'results') do %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag 'Search', :disable_with => 'Please wait...', :class => 'submit' %>
+<% end %>
+
+<div id="results">
+  <%= render partial: 'results', locals: { songs: @songs} %>
+</div>
+<br>

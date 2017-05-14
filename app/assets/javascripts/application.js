@@ -15,3 +15,10 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(function() {
+    $(document).on('ajax:success','form[data-update-target]', function(evt, data) {
+        var target = $(this).data('update-target');
+        $('#' + target).html(data);
+    });
+});

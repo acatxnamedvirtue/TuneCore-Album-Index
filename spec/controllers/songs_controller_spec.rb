@@ -116,4 +116,18 @@ RSpec.describe SongsController, type: :controller do
     end
   end
 
+  describe "SEARCH #search" do
+    it "returns a success response with no search param" do
+      song = Song.create! valid_attributes
+      get :search, params: {}, session: valid_session
+      expect(response).to be_success
+    end
+
+    it "returns a success response with a search paramm" do
+      song = Song.create! valid_attributes
+      post :search, params: {search: song.title}, session: valid_session
+      expect(response).to be_success
+    end
+  end
+
 end

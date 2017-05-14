@@ -1,11 +1,11 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
-  helper_method :sort_column, :sort_direction
 
   # GET /songs
   # GET /songs.json
   def index
-    @songs = Song.all.includes(:album)
+    @songs = Song.all.includes(:album).includes(:artist)
+    @results ||= []
   end
 
   # GET /songs/1
@@ -65,6 +65,17 @@ class SongsController < ApplicationController
     respond_to do |format|
       format.html {redirect_to songs_url, notice: 'Song was successfully destroyed.'}
       format.json {head :no_content}
+    end
+  end
+
+  # SEARCH /search
+  def search
+    if params[:search]
+      @songs = Song.search(params[:search])
+      render partial: 'results', :content_type => 'text/html'
+    else
+      @songs = Song.all
+      render :search
     end
   end
 

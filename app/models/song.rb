@@ -5,11 +5,8 @@ class Song < ApplicationRecord
   validates_presence_of :title, :album_id, :track_number, :length
 
   def self.search(search)
-    if search
-      where('title LIKE ?', "%#{search}")
-    else
-      all
-    end
+    Song.joins(:album).joins(:artist)
+        .where('songs.title LIKE ? OR albums.title LIKE ? OR artists.name LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
   end
 
   def album_title
