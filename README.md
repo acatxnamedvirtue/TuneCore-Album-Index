@@ -1,24 +1,33 @@
-# README
+# Music Search
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app allows you to search for music by any combination of Artist Name, Album Title, or Song Title
 
-Things you may want to cover:
+There is semi-realistic seed data of 500 songs, 100 albums, and 10 artists using the Faker gem library
 
-* Ruby version
+To load the seed data, please run `rake db:seed`
 
-* System dependencies
+There is only one viewable page, the search view. Controllers and views have been implemented for all 3 models,
+but these are hidden from the user because the app specifications do not require it. As such, they have not been styled.
 
-* Configuration
+## From a fresh download
 
-* Database creation
+Run these commands:
 
-* Database initialization
+```
+bundle install
 
-* How to run the test suite
+rake db:create
+rake db:migrate
+rake db:seed
 
-* Services (job queues, cache servers, search engines, etc.)
+rails s
 
-* Deployment instructions
+```
 
-* ...
+And navigate to localhost:3000
+
+## Tests
+
+Make sure the test database is migrated with `rake db:migrate Rails_env=test`
+
+Then run `rspec` from the root directory

@@ -4,6 +4,27 @@
 
 table, th, td {
   font-family: "Lucida Grande", Helvetica, sans-serif;
+  color: white !important;
+}
+
+.headline {
+  text-align: center;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  color: white !important;
+}
+
+body {
+  background-color: black !important;
+}
+
+.form-group input {
+  background-color: black !important;
+  color: white !important;
+}
+
+.pagination li span,
+.pagination li a {
+  background-color: black !important;
 }
 
 // >900px
@@ -137,6 +158,7 @@ table, th, td {
     width: 75px;
     padding-left: 0;
     padding-right: 0;
+    text-align: center;
   }
 
   #page-paginate .pagination .prev,
