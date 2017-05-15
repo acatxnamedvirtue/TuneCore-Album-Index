@@ -19,7 +19,6 @@
 $(function() {
     $(document).on('ajax:success','form[data-update-target]', function(evt, data) {
         var target = $(this).data('update-target');
-        debugger;
         $('body').html(data.substring(data.indexOf('<div id="main-container"'), data.lastIndexOf("</div>")+6));
     });
 });
