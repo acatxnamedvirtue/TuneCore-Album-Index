@@ -1,22 +1,26 @@
-<table class="table">
-  <thead>
-  <tr>
-    <th>Title</th>
-    <th>Album</th>
-    <th>Artist</th>
-    <th>Track #</th>
-    <th>Length</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @songs.each do |song| %>
-      <tr>
-        <td class="col-xs-2"><%= song.title %></td>
-        <td class="col-xs-2"><%= song.album.title %></td>
-        <td class="col-xs-2"><%= song.album.artist.name %></td>
-        <td class="col-xs-2"><%= song.track_number %></td>
-        <td class="col-xs-2"><%= song.format_length %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+<%= will_paginate @songs, params: params, renderer: BootstrapPagination::Rails, remote: true %>
+<div id="table-data">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Album</th>
+      <th>Artist</th>
+      <th>Track #</th>
+      <th>Length</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @songs.each do |song| %>
+        <tr>
+          <td class="col-xs-2"><%= song.title %></td>
+          <td class="col-xs-2"><%= song.album.title %></td>
+          <td class="col-xs-2"><%= song.album.artist.name %></td>
+          <td class="col-xs-2"><%= song.track_number %></td>
+          <td class="col-xs-2"><%= song.format_length %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @songs, params: params, renderer: BootstrapPagination::Rails, remote: true %>

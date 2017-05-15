@@ -1,15 +1,17 @@
 <p id="notice"><%= notice %></p>
+<div class="search-form">
+  <%= form_tag request.path, remote: true, 'data-update-target': 'results', method: 'get' do %>
+      <div class="form-group">
+        <%= text_field_tag :search, params[:search], placeholder: 'Search by Song, Album, or Artist', class: 'form-control' %>
+      </div>
+  <% end %>
+</div>
 
-<%= form_tag({:action => 'search'}, :remote => true, :'data-update-target' => 'results') do %>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag 'Search', :disable_with => 'Please wait...', :class => 'submit' %>
-<% end %>
+<br>
 
 <div id="page-paginate">
-  <%= will_paginate @songs %>
-  <div id="results">
+  <div id="results" class="col-xl-9 col-lg-9">
     <%= render partial: 'results', locals: {songs: @songs} %>
   </div>
-  <%= will_paginate @songs %>
 </div>
 <br>

@@ -1,3 +1,122 @@
 // Place all the styles related to the Songs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table, th, td {
+  font-family: "Lucida Grande", Helvetica, sans-serif ;
+}
+
+// >900px
+@media screen and (min-width: 901px) {
+  .search-form {
+    display: block;
+    width: 617px;
+    height: 35px;
+    position: relative;
+    right: 1px;
+    margin: 0 auto;
+  }
+
+  .pagination {
+    display: block !important;
+    width: 618px;
+    height: 35px;
+    margin: 0 auto !important;
+  }
+
+  .pagination a, .pagination span {
+    border: 1px solid #ccc !important;
+    height: 35px;
+    padding-top: 7px !important;
+  };
+
+  .next a, .next span, .prev a, .prev span {
+    width: 100px;
+    text-align: center;
+  }
+
+  #results {
+    margin: 10px auto;
+    width: 647px;
+    float: none;
+  }
+}
+
+//651-800px
+@media screen and (min-width: 651px) and (max-width: 900px) {
+  .search-form {
+    display: block;
+    width: 600px;
+    height: 35px;
+    margin: 0 auto;
+  }
+
+  .pagination {
+    display: block !important;
+    width: 600px;
+    height: 35px;
+    margin: 0 auto !important;
+  }
+
+  .pagination a, .pagination span {
+    border: 1px solid #ccc !important;
+    height: 35px;
+    padding-top: 7px !important;
+  };
+
+  .next a, .next span, .prev a, .prev span {
+    text-align: center;
+  }
+
+  .next a, .next span {
+    width: 84px;
+  };
+
+  #results {
+    margin: 10px auto;
+    width: 500px;
+    float: none;
+  }
+}
+
+// <650px
+@media (max-width: 650px) {
+  .search-form {
+    display: block;
+    width: 350px;
+    height: 35px;
+    margin: 0 auto;
+  }
+
+  #page-paginate > .pagination {
+    display: block;
+    width: 350px;
+    height: 35px;
+    margin: 0 auto !important;
+  }
+
+  #page-paginate > .pagination > .prev,
+  #page-paginate > .pagination > .next {
+    display: block !important;
+    float: left;
+    margin-bottom: 10px;
+
+  }
+
+  .next a, .next span, .prev a, .prev span {
+    width: 175px;
+    height: 34px;
+    text-align: center;
+    border: 1px solid #ccc !important;
+  }
+
+  #page-paginate > .pagination > li {
+    display: none;
+    margin: 0 auto;
+  }
+
+  #page-paginate > .pagination > li:first-child,
+  #page-paginate > .pagination > li:last-child {
+    display: inline;
+  }
+}
