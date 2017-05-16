@@ -16,9 +16,9 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-$(function() {
-    $(document).on('ajax:success','form[data-update-target]', function(evt, data) {
+$(function () {
+    $(document).on('ajax:success', 'form[data-update-target]', function (evt, data) {
         var target = $(this).data('update-target');
-        $('body').html(data.substring(data.indexOf('<div id="main-container"'), data.lastIndexOf("</div>")+6));
+        $('body').html(data.substring(data.indexOf('<div id="main-container"'), data.lastIndexOf("</div>") + 6));
     });
 });

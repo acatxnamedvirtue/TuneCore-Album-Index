@@ -4,7 +4,7 @@ class SongsController < ApplicationController
   # GET /songs
   # GET /songs.json
   def index
-    @songs = Song.all.includes(:album).includes(:artist).paginate(page: params[:page], per_page: 10).order('title ASC')
+    @songs = Song.all.paginate(page: params[:page], per_page: 10).order('title ASC')
   end
 
   # GET /songs/1
@@ -24,13 +24,7 @@ class SongsController < ApplicationController
   # POST /songs
   # POST /songs.json
   def create
-    album = Album.find_by('title = ?', song_params['album_title'])
-    params = song_params
-    params.delete(:album_title)
-    if album
-      params['album_id'] = album.id
-    end
-    @song = Song.new(params)
+    @song = Song.new(song_params)
 
     respond_to do |format|
       if @song.save
@@ -67,26 +61,12 @@ class SongsController < ApplicationController
     end
   end
 
-  # SEARCH /search
-  def search
-    if params[:search] && params[:search] != ''
-      @songs = Song.search(params[:search]).paginate(page: params[:page], per_page: 10)
-      render :search, :content_type => 'text/html'
-    elsif params[:search] == ''
-      @songs = Song.all.paginate(page: params[:page], per_page: 10)
-      render :search, :content_type => 'text/html'
-    else
-      @songs = Song.all.paginate(page: params[:page], per_page: 10)
-      render :search
-    end
-  end
-
   private
   def set_song
-    @song = Song.includes(:album).find(params[:id])
+    @song = Song.find(params[:id])
   end
 
   def song_params
-    params.require(:song).permit(:title, :album_title, :track_number, :length)
+    params.require(:song).permit(:title, :album_title, :artist_name, :track_number, :length)
   end
 end
